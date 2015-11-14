@@ -1,0 +1,21 @@
+{
+  "name": "fidelity",
+  "version": "1.0.0",
+  "description": "A simple A+ promises implementation",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha"
+  },
+  "keywords": [
+    "promises",
+    "A+"
+  ],
+  "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  }
+}
