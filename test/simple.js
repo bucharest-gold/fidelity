@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    promise = require('../lib/index.js');
+    promise = require('../lib/index.js'),
+    adapter = require('./spec-adapter.js');
 
 describe('A fidelity promise', function() {
 
@@ -103,10 +104,54 @@ describe('A fidelity promise', function() {
       });
 
       p.then(function(value) {
+        assert.false(value);
       }, function(reason) {
         assert.equal(promise.REJECTED, p.state);
         done();
       });
+    });
+
+    it('should resolve eventually', function(done) {
+      var resolver;
+      var p = promise(function(resolve, reject) {
+        resolver = resolve;
+      }).then(function onFulfilled(value) {
+        done();
+      }, function onRejected(err) {
+        assert.fail(err);
+      });
+      setTimeout(function() {
+        resolver('Eventually Done!');
+      }, 50);
+    });
+
+    it('should pass 2.2.2.1 already fulfilled', function(done) {
+      var sentinel = { sentinel: "sentinel" };
+      adapter.resolved(sentinel)
+        .then(function onFulfilled(value) {
+          assert.strictEqual(value, sentinel);
+          done();
+        });
+    });
+
+    it('should pass 2.2.2.2 fulfilled after a delay', function(done) {
+      var d = adapter.deferred();
+      var isFulfilled = false;
+      var dummy = { dummy: "dummy" };
+
+      d.promise.then(function onFulfilled() {
+        console.log("THEN CALLED " + isFulfilled);
+        assert.strictEqual(isFulfilled, true);
+        done();
+      });
+
+      setTimeout(function () {
+        console.log('TIMEOUT CALLED');
+        d.resolve(dummy);
+        console.log('RESOLUTION DONE');
+        isFulfilled = true;
+        console.log('ISFULFILLED TRUE');
+      }, 50);
     });
   });
 });

@@ -16,6 +16,7 @@
   "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "promises-aplus-tests": "^2.1.1"
   }
 }
