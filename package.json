@@ -1,22 +1,30 @@
 {
-  "name": "fidelity",
-  "version": "1.0.0",
-  "description": "A simple A+ promises implementation",
-  "main": "lib/index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "node_modules/mocha/bin/mocha"
-  },
-  "keywords": [
-    "promises",
-    "A+"
-  ],
-  "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
-  "license": "MIT",
-  "devDependencies": {
-    "mocha": "^2.3.3",
-    "promises-aplus-tests": "^2.1.1"
-  }
+    "name": "fidelity",
+    "version": "1.0.0",
+    "description": "A simple A+ promises implementation",
+    "main": "lib/index.js",
+    "directories": {
+        "test": "test"
+    },
+    "implements": [
+    ],
+    "scripts": {
+        "test": "node_modules/mocha/bin/mocha"
+    },
+    "keywords": [
+        "promises",
+        "future",
+        "aplus",
+        "A+"
+    ],
+    "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
+    "license": "MIT",
+    "devDependencies": {
+        "mocha": "^2.3.3",
+        "promises-aplus-tests": "^2.1.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": https://github.com/lance/fidelity
+    }
 }
