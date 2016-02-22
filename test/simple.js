@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    promise = require('../lib/index.js'),
+    Fidelity = require('../lib/index.js'),
+    promise = Fidelity.promise,
     adapter = require('./spec-adapter.js');
 
 describe('A fidelity promise', function() {
