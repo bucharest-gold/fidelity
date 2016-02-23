@@ -1,6 +1,6 @@
 {
     "name": "fidelity",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "description": "A simple A+ promises implementation",
     "main": "lib/index.js",
     "directories": {
@@ -13,6 +13,8 @@
     },
     "keywords": [
         "promises",
+        "promise",
+        "deferred",
         "future",
         "aplus",
         "A+"
