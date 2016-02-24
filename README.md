@@ -19,9 +19,9 @@ A fidelity `promise` takes a function as an argument. This function accepts a
 `resolve` and a `reject` object. Suppose we have a function `f()` that takes
 some time to complete asynchronously. We can call this function using a promise.
 
-    var promise = require('promise');
+    var Fidelity = require('fidelity');
 
-    var p = promise(function(resolve, reject) {
+    var p = Fidelity.promise(function(resolve, reject) {
       var result = f();
       if (result) {
         resolve(f);
