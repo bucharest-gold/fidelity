@@ -1,0 +1,13 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "4"
+  - "5"
+  - "6"
+script:
+   - make ci
+after_script:
+   - ./build/stop-server.sh
+notifications:
+  irc: "chat.freenode.net#brass-monkey"
