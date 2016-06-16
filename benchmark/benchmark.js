@@ -40,7 +40,7 @@ function runBenchmarks () {
     "new Promise()" : function (done) {
       newNativePromise().then(done);
     },
-    "Promise.resolve" : function (done) {
+    "native Promise.resolve" : function (done) {
       nativePromiseResolve().then(done);
     },
     "Fidelity.resolve" : function(done) {
