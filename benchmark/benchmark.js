@@ -19,8 +19,14 @@ function nativePromiseResolve () {
   return Promise.resolve(getRandomInt(0,10));
 }
 
-function fidelityPromise () {
+function fidelityResolve () {
   return Fidelity.resolve(getRandomInt(0,10));
+}
+
+function fidelityPromise () {
+  return Fidelity.promise((resolve, reject) => {
+    resolve(getRandomInt(0,10));
+  });
 }
 
 function bluebirdPromise () {
@@ -35,6 +41,12 @@ function PromiseModuleResolve () {
   return PromiseModule.resolve(getRandomInt(0,10));
 }
 
+function PromiseModuleNewPromise () {
+  return new PromiseModule((resolve, reject) => {
+    resolve(getRandomInt(0,10));
+  });
+}
+
 function runBenchmarks () {
   exports.compare = {
     "new Promise()" : function (done) {
@@ -43,8 +55,11 @@ function runBenchmarks () {
     "native Promise.resolve" : function (done) {
       nativePromiseResolve().then(done);
     },
-    "Fidelity.resolve" : function(done) {
+    "Fidelity.promise" : function(done) {
       fidelityPromise().then(done);
+    },
+    "Fidelity.resolve" : function(done) {
+      fidelityResolve().then(done);
     },
     "Bluebird.resolve" : function (done) {
       bluebirdPromise().then(done);
@@ -54,6 +69,9 @@ function runBenchmarks () {
     },
     "PromiseModule.resolve" : function (done) {
       PromiseModuleResolve().then(done);
+    },
+    "new PromiseModule()" : function (done) {
+      PromiseModuleNewPromise().then(done);
     }
   };
 
