@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "jshint lib/*.js test/*.js",
     "test": "node test/tape-test.js | tap-spec && promises-aplus-tests test/spec-adapter.js",
-    "coverage": "istanbul cover tape -- test/tape-test.js | tap-spec",
+    "coverage": "./coverage.sh",
     "docs": "jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/index.js",
     "prepublish": "nsp check",
     "benchmark": "node benchmark/benchmark.js",

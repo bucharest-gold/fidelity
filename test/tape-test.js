@@ -91,7 +91,7 @@ test('A promise should pass A+ spec 2.2.2.2 fulfilled after a delay', (t) => {
 
 test('Promises should chain', (t) => {
   const p = Fidelity.promise((resolve, reject) => {
-    resolve('First resolved value');
+    process.nextTick(() => resolve('First resolved value'));
   });
 
   p.then(function (value) {
@@ -130,4 +130,20 @@ test('Promises should chain', (t) => {
       t.end();
     });
   });
+
+  test('Fidelity.resolve', (t) => {
+    t.strictEqual(Fidelity.resolve(null).value, null);
+    t.strictEqual(Fidelity.resolve(undefined).value, undefined);
+    t.strictEqual(Fidelity.resolve(true).value, true);
+    t.strictEqual(Fidelity.resolve(false).value, false);
+    t.strictEqual(Fidelity.resolve(0).value, 0);
+    t.strictEqual(Fidelity.resolve('').value, '');
+    t.strictEqual(Fidelity.resolve(Infinity).value, Infinity);
+    t.strictEqual(Fidelity.resolve(-Infinity).value, -Infinity);
+    t.strictEqual(Fidelity.resolve(Fidelity.promise((r) => {
+      r('Test resolution');
+    })).value, 'Test resolution');
+    t.end();
+  });
+
 });
