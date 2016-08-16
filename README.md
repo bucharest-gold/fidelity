@@ -14,8 +14,8 @@ The API is pretty simple, and it's lightly documented [here](http://lanceball.co
 
 ## Usage
 
-A fidelity `promise` takes a function as an argument. This function accepts a
-`resolve` and a `reject` object. Suppose we have a function `f()` that takes
+A fidelity `promise` takes a function as an argument. This function accepts
+`resolve` and `reject` functions. Suppose we have a function `f()` that takes
 some time to complete asynchronously. We can call this function using a promise.
 
     var Fidelity = require('fidelity');
@@ -32,10 +32,13 @@ some time to complete asynchronously. We can call this function using a promise.
       // Do something with the result.
     });
 
+### promise.then(onFulfilled, onRejected)
+
 The promise object returned from `promise()` has a function, `then()`. This
-takes two function arguments. The first is called with the return
+takes two function arguments. The first, `onFulfilled`, is called with the return
 value (if any) of the promise function if it is successfully fulfilled. The
-second function is called in the event of an error.
+second function, `onRejected` is called in the event of an error. A `promise`
+is returned in either case.
 
     p.then( (result) => {
       console.log('sucessful result ', result);
@@ -43,12 +46,17 @@ second function is called in the event of an error.
       console.error('whoops!', err);
     });
 
+### promise.catch(onRejected)
+
+This is just a little syntactic sugar for `promise.then(null, onRejected);`.
+It returns a `promise`.
+
 ## Benchmarks
 
 It's pretty fast. Benchmarks are notoriously
 a lot like [statistics](https://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistics)
 so take this with a grain of salt. Results from a simplified, non-scientific benchmark
-performed on a Macbook Pro on a random Thursday morning.
+performed on a Macbook Pro on a random Tuesday afternoon. Your results may vary.
 
     ~/s/fidelity git:master ❮❮❮ npm run benchmark                                         ⏎ ⬆ ✭ ✱
 
@@ -58,8 +66,8 @@ performed on a Macbook Pro on a random Thursday morning.
     benchmarking /Users/lanceball/src/fidelity/benchmark/benchmark.js
     Please be patient.
     { http_parser: '2.7.0',
-      node: '6.2.0',
-      v8: '5.0.71.47',
+      node: '6.4.0',
+      v8: '5.0.71.60',
       uv: '1.9.1',
       zlib: '1.2.8',
       ares: '1.10.1-DEV',
@@ -70,62 +78,78 @@ performed on a Macbook Pro on a random Thursday morning.
 
     PromiseModule.resolve
     Raw:
-    > 1452.0469530469531
-    > 1451.051948051948
-    > 1328.9690309690309
-    > 1381.3556443556442
-    Average (mean) 1403.355894105894
+    > 1555.3626373626373
+    > 1401.2167832167831
+    > 1327.6563436563436
+    > 1393.0969030969031
+    Average (mean) 1419.3331668331666
+
+    new PromiseModule()
+    Raw:
+    > 1365.4745254745255
+    > 1343.7552447552448
+    > 1191.027972027972
+    > 1181.5374625374625
+    Average (mean) 1270.4488011988012
 
     Fidelity.resolve
     Raw:
-    > 480.5814185814186
-    > 470.0689310689311
-    > 442.5074925074925
-    > 518.3576423576424
-    Average (mean) 477.87887112887114
+    > 933.9120879120879
+    > 896.8631368631369
+    > 870.8951048951049
+    > 922.7932067932068
+    Average (mean) 906.1158841158842
 
-    Bluebird.resolve
+    Fidelity.promise
     Raw:
-    > 412.5564435564436
-    > 427.02897102897106
-    > 401.5834165834166
-    > 417.4425574425574
-    Average (mean) 414.6528471528472
+    > 785.4055944055945
+    > 777.1188811188811
+    > 712.4645354645355
+    > 734.8341658341658
+    Average (mean) 752.4557942057943
 
     native Promise.resolve
     Raw:
-    > 426.4095904095904
-    > 387.86313686313684
-    > 385.55944055944053
-    > 440.2147852147852
-    Average (mean) 410.01173826173823
+    > 420.1108891108891
+    > 426.6373626373626
+    > 403.24175824175825
+    > 405.8771228771229
+    Average (mean) 413.96678321678326
+
+    Bluebird.resolve
+    Raw:
+    > 441.4175824175824
+    > 401.4165834165834
+    > 399.82917082917083
+    > 410.04495504495503
+    Average (mean) 413.1770729270729
 
     new Promise()
     Raw:
-    > 390.84115884115886
-    > 373.2167832167832
-    > 387.4725274725275
-    > 376.1778221778222
-    Average (mean) 381.9270729270729
+    > 396.83116883116884
+    > 374.0979020979021
+    > 368.3986013986014
+    > 397.9230769230769
+    Average (mean) 384.3126873126873
 
     Q()
     Raw:
-    > 142.8181818181818
-    > 139.21678321678323
-    > 138.32867132867133
-    > 142.3116883116883
-    Average (mean) 140.66883116883116
+    > 145.3106893106893
+    > 141.88645418326692
+    > 138.93106893106892
+    > 137.1878121878122
+    Average (mean) 140.82900615320932
 
     Winner: PromiseModule.resolve
-    Compared with next highest (Fidelity.resolve), it's:
-    65.95% faster
-    2.94 times as fast
-    0.47 order(s) of magnitude faster
-    QUITE A BIT FASTER
+    Compared with next highest (new PromiseModule()), it's:
+    10.49% faster
+    1.12 times as fast
+    0.05 order(s) of magnitude faster
+    A LITTLE FASTER
 
     Compared with the slowest (Q()), it's:
-    89.98% faster
-    9.98 times as fast
+    90.08% faster
+    10.08 times as fast
     1 order(s) of magnitude faster
 
 ## Testing

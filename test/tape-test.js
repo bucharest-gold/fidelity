@@ -103,4 +103,31 @@ test('Promises should chain', (t) => {
     t.strictEqual(value, 'Second resolved value');
     t.end();
   });
+
+  test('Fidelity.promise.catch()', (t) => {
+    const p = Fidelity.promise((resolve, reject) => {
+      throw new Error('Test exception');
+    })
+    .then((_) => {
+      t.fail('Promise should short circuit to catch');
+    })
+    .catch((e) => {
+      t.strictEqual(e.message, 'Test exception');
+      t.end();
+    });
+  });
+
+  test('promise.then.catch()', (t) => {
+    const p = Fidelity.promise((resolve, reject) => {
+      resolve('Test value');
+    })
+    .then((v) => {
+      t.strictEqual(v, 'Test value');
+      throw new Error('Test exception');
+    })
+    .catch((e) => {
+      t.strictEqual(e.message, 'Test exception');
+      t.end();
+    });
+  });
 });
