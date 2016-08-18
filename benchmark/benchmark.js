@@ -4,6 +4,29 @@ const Fidelity = require('../lib/index.js');
 const Bluebird = require('bluebird');
 const PromiseModule = require('promise');
 const Q = require('q');
+const profiler = require('v8-profiler');
+const fs = require('fs');
+
+let profilerRunning = false;
+
+function toggleProfiling () {
+  if (profilerRunning) {
+    const profile = profiler.stopProfiling();
+    console.log('stopped profiling');
+    profile.export()
+      .pipe(fs.createWriteStream('./fidelity-' + Date.now() + '.cpuprofile'))
+      .once('error', profiler.deleteAllProfiles)
+      .once('finish', profiler.deleteAllProfiles);
+    profilerRunning = false;
+    return;
+  }
+  profiler.startProfiling();
+  profilerRunning = true;
+  console.log('started profiling');
+}
+
+console.log('PID', process.pid);
+process.on('SIGUSR2', toggleProfiling);
 
 function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;

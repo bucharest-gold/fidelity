@@ -2,37 +2,78 @@
 
 [![Build Status](https://travis-ci.org/lance/fidelity.svg?branch=master)](https://travis-ci.org/lance/fidelity)
 
+[![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
+
 A simple promises-aplus implementation.
 
 ## Installing
 
 `npm install fidelity`
 
-## API Documentation
-
-The API is pretty simple, and it's lightly documented [here](http://lanceball.com/fidelity/).
-
 ## Usage
 
-A fidelity `promise` takes a function as an argument. This function accepts
-`resolve` and `reject` functions. Suppose we have a function `f()` that takes
-some time to complete asynchronously. We can call this function using a promise.
+A fidelity promise behaves according to the
+[Promises/A+ specification](https://promisesaplus.com/). If you haven't read it,
+it's worth your time and will probably make all of the fidelity documentation clearer.
+
+You can create promises using the `promise` function.
+
+    var Fidelity = require('fidelity');
+    Fidelity.promise( (resolve, reject) => {
+      // etc.
+    } )
+
+You call the `promise` function with a function as the only parameter. Typically this
+function will perform some asynchronous task, and when that task has completed it will
+resolve or reject the promise depending on whether or not the task completed successfully.
+
+The function takes two function parameters: `resolve` and `reject`. These functions are
+used to resolve or reject the promise as needed. Suppose we have a function,
+`someAsyncFunction()` that takes some time to complete asynchronously. We can call
+this function using a promise.
 
     var Fidelity = require('fidelity');
 
     Fidelity.promise( (resolve, reject) => {
       someAsyncFunction((result, err) => {
         if (err) {
-          reject(err);
+          reject(err); // The function produced an error. Reject the promise
         } else {
-          resolve(result);
+          resolve(result); // Fulfill the promise with the result
         }
       });
-    }).then( (val) => {
+    })
+    .then( (val) => {
+      // This code executes after a promise has been fulfilled
       // Do something with the result.
+    })
+    .catch( (err) => {
+      // This code executes if the promise  was rejected
     });
 
-### promise.then(onFulfilled, onRejected)
+### Promise states
+
+A promise will only ever be in one of three states. `PENDING`, `FULFILLED` or `REJECTED`.
+
+## API
+
+### Fidelity
+
+The `fidelity` module exports an object from which the API is derived
+
+    const Fidelity = require('fidelity');
+    // {
+    //   promise: [Function: promise],
+    //   deferred: [Function: deferred],
+    //   resolve: [Function: resolve]
+    // };
+
+### Fidelity.promise(func)
+
+A factory function that creates and returns a promise. The `func` parameter is a function
+that accepts a `resolve` and `reject` function.
+
+### Fidelity.promise(f).then(onFulfilled, onRejected)
 
 The promise object returned from `promise()` has a function, `then()`. This
 takes two function arguments. The first, `onFulfilled`, is called with the return
@@ -46,10 +87,49 @@ is returned in either case.
       console.error('whoops!', err);
     });
 
-### promise.catch(onRejected)
+### Fidelity.promise(f).catch(onRejected)
 
 This is just a little syntactic sugar for `promise.then(null, onRejected);`.
 It returns a `promise`.
+
+### Fidelity.resolve(value)
+
+Returns a promise that has been resolved with the provided `value`.
+
+### Fidelity.deferred()
+
+ Creates and returns a `deferred` object, containing a promise which may
+ be resolved or rejected at some point in the future.
+
+ An example.
+
+    const deferred = Fidelity.deferred();
+
+    callSomeAsyncFunction((err, result) => {
+      if (err) {
+        deferred.reject(err);
+      } else {
+        deferred.resolve(result);
+      }
+    });
+
+### Fidelity.deferred().resolve(value)
+
+ Resolves the deferred promise with `value`.
+
+### Fidelity.deferred().reject(cause)
+
+Rejects the deferred promise with `cause`.
+
+### Fidelity.deferred().promise
+
+The deferred promise.
+
+## Testing
+
+This module passes all of the tests in the
+[Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests).
+To run the full suite of the Promises/A+ spec, just `npm test` from the command line.
 
 ## Benchmarks
 
@@ -151,9 +231,3 @@ performed on a Macbook Pro on a random Tuesday afternoon. Your results may vary.
     90.08% faster
     10.08 times as fast
     1 order(s) of magnitude faster
-
-## Testing
-
-This module passes all of the tests in the
-[Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests).
-To run the full suite of the Promises/A+ spec, just `npm test` from the command line.
