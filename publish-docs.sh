@@ -20,7 +20,7 @@ while true; do
 done
 
 npm run docs
-git clone https://github.com/lance/fidelity.git $PUBLISH_DIR
+git clone https://github.com/bucharest-gold/fidelity.git $PUBLISH_DIR
 cd $PUBLISH_DIR
 git checkout gh-pages
 mkdir $VERSION
