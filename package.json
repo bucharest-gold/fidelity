@@ -1,12 +1,11 @@
 {
   "name": "fidelity",
-  "version": "3.0.2",
-  "description": "A simple A+ promises implementation",
+  "version": "3.0.3",
+  "description": "A simple and fast Promises/A+ implementation",
   "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
-  "implements": [],
   "scripts": {
     "lint": "jshint lib/*.js test/*.js",
     "test": "node test/tape-test.js | tap-spec && promises-aplus-tests test/spec-adapter.js",
@@ -24,7 +23,7 @@
     "aplus",
     "A+"
   ],
-  "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
+  "author": "Lance Ball <lball@redhat.com> (http://lanceball.com)",
   "license": "MIT",
   "devDependencies": {
     "bench": "^0.3.6",
@@ -43,6 +42,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lance/fidelity"
+    "url": "https://github.com/bucharest-gold/fidelity"
   }
 }
