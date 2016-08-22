@@ -4,7 +4,9 @@
 
 [![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
 
-A simple promises-aplus implementation.
+A fast and simple Promise/A+ implementation.
+
+> _Node.js 4,5,6_
 
 ## Installing
 
@@ -18,7 +20,7 @@ it's worth your time and will probably make all of the fidelity documentation cl
 
 You can create promises using the `promise` function.
 
-    var Fidelity = require('fidelity');
+    const Fidelity = require('fidelity');
     Fidelity.promise( (resolve, reject) => {
       // etc.
     } )
@@ -32,7 +34,7 @@ used to resolve or reject the promise as needed. Suppose we have a function,
 `someAsyncFunction()` that takes some time to complete asynchronously. We can call
 this function using a promise.
 
-    var Fidelity = require('fidelity');
+    const Fidelity = require('fidelity');
 
     Fidelity.promise( (resolve, reject) => {
       someAsyncFunction((result, err) => {
