@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "jshint lib/*.js test/*.js",
+    "lint": "eslint lib/index.js test/*.js",
     "test": "node test/tape-test.js | tap-spec && promises-aplus-tests test/spec-adapter.js",
     "coverage": "./coverage.sh",
     "docs": "jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/index.js",
@@ -28,10 +28,15 @@
   "devDependencies": {
     "bench": "^0.3.6",
     "bluebird": "^3.3.5",
+    "eslint": "^3.3.1",
+    "eslint-config-semistandard": "^7.0.0-beta.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.1.2",
+    "eslint-plugin-standard": "^2.0.0",
     "ink-docstrap": "^1.1.4",
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
-    "jshint": "^2.9.2",
     "nsp": "^2.4.0",
     "promise": "^7.1.1",
     "promises-aplus-tests": "^2.1.1",

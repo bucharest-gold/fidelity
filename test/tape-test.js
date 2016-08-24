@@ -51,7 +51,7 @@ test('A failed promise state should be REJECTED', (t) => {
 
 test('A promise should eventually resolve', (t) => {
   let resolver;
-  const p = Fidelity.promise((resolve, reject) => {
+  Fidelity.promise((resolve, reject) => {
     resolver = resolve;
   }).then((value) => {
     t.equal(value, 'Eventually Done!');
@@ -105,7 +105,7 @@ test('Promises should chain', (t) => {
   });
 
   test('Fidelity.promise.catch()', (t) => {
-    const p = Fidelity.promise((resolve, reject) => {
+    Fidelity.promise((resolve, reject) => {
       throw new Error('Test exception');
     })
     .then((_) => {
@@ -118,7 +118,7 @@ test('Promises should chain', (t) => {
   });
 
   test('promise.then.catch()', (t) => {
-    const p = Fidelity.promise((resolve, reject) => {
+    Fidelity.promise((resolve, reject) => {
       resolve('Test value');
     })
     .then((v) => {
@@ -145,5 +145,4 @@ test('Promises should chain', (t) => {
     })).value, 'Test resolution');
     t.end();
   });
-
 });
