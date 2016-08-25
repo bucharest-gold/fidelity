@@ -47,7 +47,7 @@ function fidelityResolve () {
 }
 
 function fidelityPromise () {
-  return Fidelity.promise((resolve, reject) => {
+  return new Fidelity((resolve, reject) => {
     resolve(getRandomInt(0,10));
   });
 }
@@ -78,7 +78,7 @@ function runBenchmarks () {
     "native Promise.resolve" : function (done) {
       nativePromiseResolve().then(done);
     },
-    "Fidelity.promise" : function(done) {
+    "new Fidelity.Promise" : function(done) {
       fidelityPromise().then(done);
     },
     "Fidelity.resolve" : function(done) {

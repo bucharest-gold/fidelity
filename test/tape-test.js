@@ -1,25 +1,25 @@
 'use strict';
 
 const test = require('tape');
-const Fidelity = require('../lib/index.js');
+const Promise = require('../lib/index.js');
 
 test('A promise should begin life in a PENDING state', (t) => {
-  const p = Fidelity.promise();
-  t.equal(p.state, Fidelity.PENDING);
+  const p = new Promise();
+  t.equal(p.state, Promise.PENDING);
   t.end();
 });
 
-test('Fidelity.resolve should return a fulfilled promise', (t) => {
-  const resolved = Fidelity.resolve(10);
+test('Promise.resolve should return a fulfilled promise', (t) => {
+  const resolved = Promise.resolve(10);
   t.equal(typeof resolved, 'object');
-  t.equal(resolved.state, Fidelity.FULFILLED);
+  t.equal(resolved.state, Promise.FULFILLED);
   t.equal(resolved.value, 10);
   t.end();
 });
 
 test('promise.then() should resolve a value', (t) => {
   const expected = 'testThen resolution value';
-  Fidelity.promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     resolve(expected);
   }).then((value) => {
     t.equal(expected, value);
@@ -28,30 +28,30 @@ test('promise.then() should resolve a value', (t) => {
 });
 
 test('A resolved promise state should be FULFILLED', (t) => {
-  const p = Fidelity.promise((resolve, reject) => {
+  const p = new Promise((resolve, reject) => {
     resolve();
   });
   p.then((value) => {
-    t.equal(p.state, Fidelity.FULFILLED);
+    t.equal(p.state, Promise.FULFILLED);
     t.end();
   });
 });
 
 test('A failed promise state should be REJECTED', (t) => {
   const err = new Error('Something bad happened');
-  const p = Fidelity.promise((resolve, reject) => {
+  const p = new Promise((resolve, reject) => {
     reject(err);
   });
   p.then(undefined, (e) => {
     t.deepEqual(e, err);
-    t.equal(p.state, Fidelity.REJECTED);
+    t.equal(p.state, Promise.REJECTED);
     t.end();
   });
 });
 
 test('A promise should eventually resolve', (t) => {
   let resolver;
-  Fidelity.promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     resolver = resolve;
   }).then((value) => {
     t.equal(value, 'Eventually Done!');
@@ -66,7 +66,7 @@ test('A promise should eventually resolve', (t) => {
 
 test('A promise should pass A+ spec 2.2.2.1 already fulfilled', (t) => {
   const sentinel = { sentinel: 'sentinel' };
-  Fidelity.resolve(sentinel)
+  Promise.resolve(sentinel)
     .then((value) => {
       t.deepEqual(value, sentinel);
       t.end();
@@ -74,7 +74,7 @@ test('A promise should pass A+ spec 2.2.2.1 already fulfilled', (t) => {
 });
 
 test('A promise should pass A+ spec 2.2.2.2 fulfilled after a delay', (t) => {
-  const d = Fidelity.deferred();
+  const d = Promise.deferred();
   const dummy = { dummy: 'dummy' };
   let isFulfilled = false;
 
@@ -90,13 +90,13 @@ test('A promise should pass A+ spec 2.2.2.2 fulfilled after a delay', (t) => {
 });
 
 test('Promises should chain', (t) => {
-  const p = Fidelity.promise((resolve, reject) => {
+  const p = new Promise((resolve, reject) => {
     process.nextTick(() => resolve('First resolved value'));
   });
 
   p.then(function (value) {
     t.strictEqual(value, 'First resolved value');
-    return Fidelity.promise((resolve) => {
+    return new Promise((resolve) => {
       resolve('Second resolved value');
     });
   }).then(function (value) {
@@ -104,8 +104,8 @@ test('Promises should chain', (t) => {
     t.end();
   });
 
-  test('Fidelity.promise.catch()', (t) => {
-    Fidelity.promise((resolve, reject) => {
+  test('romise.catch()', (t) => {
+    new Promise((resolve, reject) => {
       throw new Error('Test exception');
     })
     .then((_) => {
@@ -118,7 +118,7 @@ test('Promises should chain', (t) => {
   });
 
   test('promise.then.catch()', (t) => {
-    Fidelity.promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       resolve('Test value');
     })
     .then((v) => {
@@ -131,17 +131,17 @@ test('Promises should chain', (t) => {
     });
   });
 
-  test('Fidelity.resolve', (t) => {
-    t.strictEqual(Fidelity.resolve(null).value, null);
-    t.strictEqual(Fidelity.resolve(undefined).value, undefined);
-    t.strictEqual(Fidelity.resolve(true).value, true);
-    t.strictEqual(Fidelity.resolve(false).value, false);
-    t.strictEqual(Fidelity.resolve(0).value, 0);
-    t.strictEqual(Fidelity.resolve('').value, '');
-    t.strictEqual(Fidelity.resolve(Infinity).value, Infinity);
-    t.strictEqual(Fidelity.resolve(-Infinity).value, -Infinity);
-    t.strictEqual(Fidelity.resolve(Fidelity.promise((r) => {
-      r('Test resolution');
+  test('Promise.resolve', (t) => {
+    t.strictEqual(Promise.resolve(null).value, null);
+    t.strictEqual(Promise.resolve(undefined).value, undefined);
+    t.strictEqual(Promise.resolve(true).value, true);
+    t.strictEqual(Promise.resolve(false).value, false);
+    t.strictEqual(Promise.resolve(0).value, 0);
+    t.strictEqual(Promise.resolve('').value, '');
+    t.strictEqual(Promise.resolve(Infinity).value, Infinity);
+    t.strictEqual(Promise.resolve(-Infinity).value, -Infinity);
+    t.strictEqual(Promise.resolve(new Promise((resolve, reject) => {
+      resolve('Test resolution');
     })).value, 'Test resolution');
     t.end();
   });

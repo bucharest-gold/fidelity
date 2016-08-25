@@ -1,13 +1,13 @@
 var Fidelity = require('../lib/index.js');
 
 function resolved (value) {
-  return Fidelity.promise(function (resolve, reject) {
+  return new Fidelity(function (resolve, reject) {
     resolve(value);
   });
 }
 
 function rejected (reason) {
-  return Fidelity.promise(function (resolve, reject) {
+  return new Fidelity(function (resolve, reject) {
     reject(reason);
   });
 }

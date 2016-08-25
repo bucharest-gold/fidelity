@@ -18,25 +18,26 @@ A fidelity promise behaves according to the
 [Promises/A+ specification](https://promisesaplus.com/). If you haven't read it,
 it's worth your time and will probably make all of the fidelity documentation clearer.
 
-You can create promises using the `promise` function.
+You can create promises using the exported constructor.
 
     const Fidelity = require('fidelity');
-    Fidelity.promise( (resolve, reject) => {
+    new Fidelity( (resolve, reject) => {
       // etc.
     } )
 
-You call the `promise` function with a function as the only parameter. Typically this
+You call the constructor function with an executor function as the only parameter. Typically this
 function will perform some asynchronous task, and when that task has completed it will
 resolve or reject the promise depending on whether or not the task completed successfully.
 
-The function takes two function parameters: `resolve` and `reject`. These functions are
-used to resolve or reject the promise as needed. Suppose we have a function,
-`someAsyncFunction()` that takes some time to complete asynchronously. We can call
-this function using a promise.
+The executor function takes two function parameters: `resolve` and `reject`. These functions are
+used to resolve or reject the promise as needed.
+
+Suppose we have a function, `someAsyncFunction()` that takes some time to complete asynchronously.
+We can call this function using a promise.
 
     const Fidelity = require('fidelity');
 
-    Fidelity.promise( (resolve, reject) => {
+    new Fidelity( (resolve, reject) => {
       someAsyncFunction((result, err) => {
         if (err) {
           reject(err); // The function produced an error. Reject the promise
@@ -55,33 +56,28 @@ this function using a promise.
 
 ### Promise states
 
-A promise will only ever be in one of three states. `PENDING`, `FULFILLED` or `REJECTED`.
+A promise will only ever be in one of three states. `Fidelity.PENDING`,
+`Fidelity.FULFILLED` or `Fidelity.REJECTED`.
 
 ## API
 
 ### Fidelity
 
-The `fidelity` module exports an object from which the API is derived
+The `fidelity` module exports a constructor function for a Fidelity promise.
 
     const Fidelity = require('fidelity');
-    // {
-    //   promise: [Function: promise],
-    //   deferred: [Function: deferred],
-    //   resolve: [Function: resolve]
-    // };
 
-### Fidelity.promise(func)
+### new Fidelity(func)
 
-A factory function that creates and returns a promise. The `func` parameter is a function
+A constructor function that creates and returns a promise. The `func` parameter is a function
 that accepts a `resolve` and `reject` function.
 
-### Fidelity.promise(f).then(onFulfilled, onRejected)
+### Fidelity#then(onFulfilled, onRejected)
 
-The promise object returned from `promise()` has a function, `then()`. This
-takes two function arguments. The first, `onFulfilled`, is called with the return
-value (if any) of the promise function if it is successfully fulfilled. The
-second function, `onRejected` is called in the event of an error. A `promise`
-is returned in either case.
+The 'then' function takes two function arguments. The first, `onFulfilled`,
+is called with the return value (if any) of the promise function if it is
+successfully fulfilled. The second function, `onRejected` is called in the
+event of an error. A `promise` is returned in either case.
 
     p.then( (result) => {
       console.log('sucessful result ', result);
@@ -89,18 +85,20 @@ is returned in either case.
       console.error('whoops!', err);
     });
 
-### Fidelity.promise(f).catch(onRejected)
+### Fidelity#catch(onRejected)
 
 This is just a little syntactic sugar for `promise.then(null, onRejected);`.
 It returns a `promise`.
 
 ### Fidelity.resolve(value)
 
-Returns a promise that has been resolved with the provided `value`.
+A static utility function that returns a promise which has been resolved
+with the provided `value`.
 
 ### Fidelity.deferred()
 
- Creates and returns a `deferred` object, containing a promise which may
+ A static utility function that Creates and returns a `deferred` object.
+ Deferred objects contain a promise which may
  be resolved or rejected at some point in the future.
 
  An example.
