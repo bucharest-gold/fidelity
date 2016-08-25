@@ -61,6 +61,8 @@ A promise will only ever be in one of three states. `Fidelity.PENDING`,
 
 ## API
 
+Generated documentation can be found here: http://bucharest-gold.github.io/fidelity.
+
 ### Fidelity
 
 The `fidelity` module exports a constructor function for a Fidelity promise.

@@ -2,7 +2,6 @@
 
 PUBLISH_DIR="publish"
 
-. build/version.sh
 echo $1
 git status -s | grep "^[MADRCU\? ][ MDMAU\?]"
 if [[ $? -eq 0 && "$1" != "-f" ]]; then
@@ -23,9 +22,8 @@ npm run docs
 git clone https://github.com/bucharest-gold/fidelity.git $PUBLISH_DIR
 cd $PUBLISH_DIR
 git checkout gh-pages
-mkdir $VERSION
 rsync -r ../docs/* ./
-rsync -r ../docs/* ./$VERSION/
+rsync -r ../docs/* ./
 git status -s | grep "^[MADRCU\? ][ MDMAU\?]"
 
 if [ $? -eq 0 ]; then
