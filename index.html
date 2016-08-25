@@ -37,6 +37,13 @@
 				</ul>
 			</li>
 			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="FidelityPromise.html">FidelityPromise</a></li>
+				</ul>
+			</li>
+			
 		</ul>
 		<div class="col-sm-3 col-md-3">
             <form class="navbar-form" role="search">
@@ -84,36 +91,176 @@
 
 
     <section class="readme-section">
-        <article><h1>Fidelity</h1><p>A simple promises-aplus implementation. Faster than <code>Q</code>, slower than <code>Bluebird</code>.
-Simpler and smaller than both.</p>
+        <article><h1><a href="https://promisesaplus.com"><img src="https://promisesaplus.com/assets/logo-small.png" alt="Promises/A+"></a> Fidelity</h1><p><a href="https://travis-ci.org/bucharest-gold/fidelity"><img src="https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master" alt="Build Status"></a></p>
+<p><a href="https://npmjs.org/package/fidelity"><img src="https://nodei.co/npm/fidelity.png" alt="NPM"></a></p>
+<p>A fast and simple Promise/A+ implementation.</p>
+<blockquote>
+<p><em>Node.js 4,5,6</em></p>
+</blockquote>
 <h2>Installing</h2><p><code>npm install fidelity</code></p>
-<h2>API Documentation</h2><p>The API is pretty simple, and it's lightly documented <a href="http://lanceball.com/fidelity/">here</a>.</p>
-<h2>Usage</h2><p>A fidelity <code>promise</code> takes a function as an argument. This function accepts a
-<code>resolve</code> and a <code>reject</code> object. Suppose we have a function <code>f()</code> that takes
-some time to complete asynchronously. We can call this function using a promise.</p>
-<pre class="prettyprint source"><code>var Fidelity = require('fidelity');
+<h2>Usage</h2><p>A fidelity promise behaves according to the
+<a href="https://promisesaplus.com/">Promises/A+ specification</a>. If you haven't read it,
+it's worth your time and will probably make all of the fidelity documentation clearer.</p>
+<p>You can create promises using the exported constructor.</p>
+<pre class="prettyprint source"><code>const Fidelity = require('fidelity');
+new Fidelity( (resolve, reject) => {
+  // etc.
+} )</code></pre><p>You call the constructor function with an executor function as the only parameter. Typically this
+function will perform some asynchronous task, and when that task has completed it will
+resolve or reject the promise depending on whether or not the task completed successfully.</p>
+<p>The executor function takes two function parameters: <code>resolve</code> and <code>reject</code>. These functions are
+used to resolve or reject the promise as needed.</p>
+<p>Suppose we have a function, <code>someAsyncFunction()</code> that takes some time to complete asynchronously.
+We can call this function using a promise.</p>
+<pre class="prettyprint source"><code>const Fidelity = require('fidelity');
 
-Fidelity.promise( (resolve, reject) => {
+new Fidelity( (resolve, reject) => {
   someAsyncFunction((result, err) => {
     if (err) {
-      reject(err);
+      reject(err); // The function produced an error. Reject the promise
     } else {
-      resolve(result);
+      resolve(result); // Fulfill the promise with the result
     }
   });
-}).then( (val) => {
+})
+.then( (val) => {
+  // This code executes after a promise has been fulfilled
   // Do something with the result.
-});</code></pre><p>The promise object returned from <code>promise()</code> has a function, <code>then()</code>. This
-takes two function arguments. The first is called with the return
-value (if any) of the promise function if it is successfully fulfilled. The
-second function is called in the event of an error.</p>
+})
+.catch( (err) => {
+  // This code executes if the promise  was rejected
+});</code></pre><h3>Promise states</h3><p>A promise will only ever be in one of three states. <code>Fidelity.PENDING</code>,
+<code>Fidelity.FULFILLED</code> or <code>Fidelity.REJECTED</code>.</p>
+<h2>API</h2><h3>Fidelity</h3><p>The <code>fidelity</code> module exports a constructor function for a Fidelity promise.</p>
+<pre class="prettyprint source"><code>const Fidelity = require('fidelity');</code></pre><h3>new Fidelity(func)</h3><p>A constructor function that creates and returns a promise. The <code>func</code> parameter is a function
+that accepts a <code>resolve</code> and <code>reject</code> function.</p>
+<h3>Fidelity#then(onFulfilled, onRejected)</h3><p>The 'then' function takes two function arguments. The first, <code>onFulfilled</code>,
+is called with the return value (if any) of the promise function if it is
+successfully fulfilled. The second function, <code>onRejected</code> is called in the
+event of an error. A <code>promise</code> is returned in either case.</p>
 <pre class="prettyprint source"><code>p.then( (result) => {
   console.log('sucessful result ', result);
 }, (err) => {
   console.error('whoops!', err);
-});</code></pre><h2>Testing</h2><p>This module passes all of the tests in the 
+});</code></pre><h3>Fidelity#catch(onRejected)</h3><p>This is just a little syntactic sugar for <code>promise.then(null, onRejected);</code>.
+It returns a <code>promise</code>.</p>
+<h3>Fidelity.resolve(value)</h3><p>A static utility function that returns a promise which has been resolved
+with the provided <code>value</code>.</p>
+<h3>Fidelity.deferred()</h3><p> A static utility function that Creates and returns a <code>deferred</code> object.
+ Deferred objects contain a promise which may
+ be resolved or rejected at some point in the future.</p>
+<p> An example.</p>
+<pre class="prettyprint source"><code>const deferred = Fidelity.deferred();
+
+callSomeAsyncFunction((err, result) => {
+  if (err) {
+    deferred.reject(err);
+  } else {
+    deferred.resolve(result);
+  }
+});</code></pre><h3>Fidelity.deferred().resolve(value)</h3><p> Resolves the deferred promise with <code>value</code>.</p>
+<h3>Fidelity.deferred().reject(cause)</h3><p>Rejects the deferred promise with <code>cause</code>.</p>
+<h3>Fidelity.deferred().promise</h3><p>The deferred promise.</p>
+<h2>Testing</h2><p>This module passes all of the tests in the
 <a href="https://github.com/promises-aplus/promises-tests">Promises/A+ Compliance Test Suite</a>.
-To run the full suite of the Promises/A+ spec, just <code>npm test</code> from the command line.</p></article>
+To run the full suite of the Promises/A+ spec, just <code>npm test</code> from the command line.</p>
+<h2>Benchmarks</h2><p>It's pretty fast. Benchmarks are notoriously
+a lot like <a href="https://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistics">statistics</a>
+so take this with a grain of salt. Results from a simplified, non-scientific benchmark
+performed on a Macbook Pro on a random Tuesday afternoon. Your results may vary.</p>
+<pre class="prettyprint source"><code>~/s/fidelity git:master ❮❮❮ npm run benchmark                                         ⏎ ⬆ ✭ ✱
+
+> fidelity@3.0.1 benchmark /Users/lanceball/src/fidelity
+> node benchmark/benchmark.js
+
+benchmarking /Users/lanceball/src/fidelity/benchmark/benchmark.js
+Please be patient.
+{ http_parser: '2.7.0',
+  node: '6.4.0',
+  v8: '5.0.71.60',
+  uv: '1.9.1',
+  zlib: '1.2.8',
+  ares: '1.10.1-DEV',
+  icu: '57.1',
+  modules: '48',
+  openssl: '1.0.2h' }
+Scores: (bigger is better)
+
+PromiseModule.resolve
+Raw:
+> 1555.3626373626373
+> 1401.2167832167831
+> 1327.6563436563436
+> 1393.0969030969031
+Average (mean) 1419.3331668331666
+
+new PromiseModule()
+Raw:
+> 1365.4745254745255
+> 1343.7552447552448
+> 1191.027972027972
+> 1181.5374625374625
+Average (mean) 1270.4488011988012
+
+Fidelity.resolve
+Raw:
+> 933.9120879120879
+> 896.8631368631369
+> 870.8951048951049
+> 922.7932067932068
+Average (mean) 906.1158841158842
+
+Fidelity.promise
+Raw:
+> 785.4055944055945
+> 777.1188811188811
+> 712.4645354645355
+> 734.8341658341658
+Average (mean) 752.4557942057943
+
+native Promise.resolve
+Raw:
+> 420.1108891108891
+> 426.6373626373626
+> 403.24175824175825
+> 405.8771228771229
+Average (mean) 413.96678321678326
+
+Bluebird.resolve
+Raw:
+> 441.4175824175824
+> 401.4165834165834
+> 399.82917082917083
+> 410.04495504495503
+Average (mean) 413.1770729270729
+
+new Promise()
+Raw:
+> 396.83116883116884
+> 374.0979020979021
+> 368.3986013986014
+> 397.9230769230769
+Average (mean) 384.3126873126873
+
+Q()
+Raw:
+> 145.3106893106893
+> 141.88645418326692
+> 138.93106893106892
+> 137.1878121878122
+Average (mean) 140.82900615320932
+
+Winner: PromiseModule.resolve
+Compared with next highest (new PromiseModule()), it's:
+10.49% faster
+1.12 times as fast
+0.05 order(s) of magnitude faster
+A LITTLE FASTER
+
+Compared with the slowest (Q()), it's:
+90.08% faster
+10.08 times as fast
+1 order(s) of magnitude faster</code></pre></article>
     </section>
 
 
@@ -157,7 +304,7 @@ To run the full suite of the Promises/A+ spec, just <code>npm test</code> from t
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on 2016-05-06T15:17:14-04:00
+		on 2016-08-25T16:33:59-04:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
