@@ -138,13 +138,14 @@ To run the full suite of the Promises/A+ spec, just `npm test` from the command 
 It's pretty fast. Benchmarks are notoriously
 a lot like [statistics](https://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistics)
 so take this with a grain of salt. Results from a simplified, non-scientific benchmark
-performed on a Macbook Pro on a random Tuesday afternoon. Your results may vary.
+performed on a Macbook Pro on a random Friday afternoon. Your results may vary.
 
-    ~/s/fidelity git:master ❮❮❮ npm run benchmark                                         ⏎ ⬆ ✭ ✱
+    ~/s/fidelity git:master ❯❯❯ npm run benchmark                                             ✭ ✱
 
-    > fidelity@3.0.1 benchmark /Users/lanceball/src/fidelity
+    > fidelity@4.0.0 benchmark /Users/lanceball/src/fidelity
     > node benchmark/benchmark.js
 
+    PID 48492
     benchmarking /Users/lanceball/src/fidelity/benchmark/benchmark.js
     Please be patient.
     { http_parser: '2.7.0',
@@ -158,78 +159,84 @@ performed on a Macbook Pro on a random Tuesday afternoon. Your results may vary.
       openssl: '1.0.2h' }
     Scores: (bigger is better)
 
-    PromiseModule.resolve
-    Raw:
-    > 1555.3626373626373
-    > 1401.2167832167831
-    > 1327.6563436563436
-    > 1393.0969030969031
-    Average (mean) 1419.3331668331666
-
     new PromiseModule()
     Raw:
-    > 1365.4745254745255
-    > 1343.7552447552448
-    > 1191.027972027972
-    > 1181.5374625374625
-    Average (mean) 1270.4488011988012
+    > 2329.3943028485755
+    > 2412.2008995502247
+    > 2452.446776611694
+    > 2293.376311844078
+    > 2340.5667166416792
+    > 2113.481259370315
+    > 2416.1349325337333
+    > 2405.9220389805096
+    > 2391.76011994003
+    > 2410.938530734633
+    Average (mean) 2356.6221889055473
 
-    Fidelity.resolve
+    new Fidelity Promise
     Raw:
-    > 933.9120879120879
-    > 896.8631368631369
-    > 870.8951048951049
-    > 922.7932067932068
-    Average (mean) 906.1158841158842
+    > 1871.0824587706147
+    > 1871.6251874062968
+    > 1865.5232383808095
+    > 1839.664167916042
+    > 1796.8215892053972
+    > 1675.2503748125937
+    > 1740.119940029985
+    > 1897.5412293853074
+    > 1881.6611694152923
+    > 1901.6221889055473
+    Average (mean) 1834.0911544227888
 
-    Fidelity.promise
+    new Bluebird Promise
     Raw:
-    > 785.4055944055945
-    > 777.1188811188811
-    > 712.4645354645355
-    > 734.8341658341658
-    Average (mean) 752.4557942057943
+    > 1632.1019490254873
+    > 1551.352323838081
+    > 1595.5382308845578
+    > 1578.6686656671664
+    > 1454.9025487256372
+    > 1525.3313343328336
+    > 1560.8305847076463
+    > 1597.0914542728635
+    > 1604.014992503748
+    > 1622.920539730135
+    Average (mean) 1572.2752623688157
 
-    native Promise.resolve
+    new native Promise
     Raw:
-    > 420.1108891108891
-    > 426.6373626373626
-    > 403.24175824175825
-    > 405.8771228771229
-    Average (mean) 413.96678321678326
+    > 1212.9355322338831
+    > 1245.9130434782608
+    > 1228.9895052473762
+    > 1222.1799100449775
+    > 1224.9655172413793
+    > 1092.1379310344828
+    > 1216.5247376311845
+    > 1252.335832083958
+    > 1256.0899550224888
+    > 1268.6986506746628
+    Average (mean) 1222.0770614692656
 
-    Bluebird.resolve
+    new QPromise
     Raw:
-    > 441.4175824175824
-    > 401.4165834165834
-    > 399.82917082917083
-    > 410.04495504495503
-    Average (mean) 413.1770729270729
+    > 346.02998500749624
+    > 344.01799100449773
+    > 349.18440779610194
+    > 350.70764617691157
+    > 342.23306772908364
+    > 315.39130434782606
+    > 346.0569715142429
+    > 354.5691462805791
+    > 360.11094452773614
+    > 350.7316341829085
+    Average (mean) 345.9033098567384
 
-    new Promise()
-    Raw:
-    > 396.83116883116884
-    > 374.0979020979021
-    > 368.3986013986014
-    > 397.9230769230769
-    Average (mean) 384.3126873126873
-
-    Q()
-    Raw:
-    > 145.3106893106893
-    > 141.88645418326692
-    > 138.93106893106892
-    > 137.1878121878122
-    Average (mean) 140.82900615320932
-
-    Winner: PromiseModule.resolve
-    Compared with next highest (new PromiseModule()), it's:
-    10.49% faster
-    1.12 times as fast
-    0.05 order(s) of magnitude faster
+    Winner: new PromiseModule()
+    Compared with next highest (new Fidelity Promise), it's:
+    22.17% faster
+    1.28 times as fast
+    0.11 order(s) of magnitude faster
     A LITTLE FASTER
 
-    Compared with the slowest (Q()), it's:
-    90.08% faster
-    10.08 times as fast
-    1 order(s) of magnitude faster
+    Compared with the slowest (new QPromise), it's:
+    85.32% faster
+    6.81 times as fast
+    0.83 order(s) of magnitude faster

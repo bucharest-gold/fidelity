@@ -28,77 +28,52 @@ function toggleProfiling () {
 console.log('PID', process.pid);
 process.on('SIGUSR2', toggleProfiling);
 
-function getRandomInt (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+function getRandomInt (min, max, callback) {
+  setImmediate(() => callback(Math.floor(Math.random() * (max - min)) + min));
 }
 
 function newNativePromise () {
-  return new Promise((resolve, reject) => {
-    resolve(getRandomInt(0, 10));
-  });
+  return new Promise((resolve, reject) => getRandomInt(0, 10, resolve));
 }
 
-function nativePromiseResolve () {
-  return Promise.resolve(getRandomInt(0,10));
+function newFidelityPromise () {
+  return new Fidelity((resolve, reject) => getRandomInt(0,10, resolve));
 }
 
-function fidelityResolve () {
-  return Fidelity.resolve(getRandomInt(0,10));
+function newBluebirdPromise () {
+  return new Bluebird((resolve, reject) => getRandomInt(0,10, resolve));
 }
 
-function fidelityPromise () {
-  return new Fidelity((resolve, reject) => {
-    resolve(getRandomInt(0,10));
-  });
+function newQPromise () {
+  return new Q.promise((resolve, reject) => getRandomInt(0,10, resolve));
 }
 
-function bluebirdPromise () {
-  return Bluebird.resolve(getRandomInt(0,10));
-}
-
-function QPromise () {
-  return Q(getRandomInt(0,10));
-}
-
-function PromiseModuleResolve () {
-  return PromiseModule.resolve(getRandomInt(0,10));
-}
-
-function PromiseModuleNewPromise () {
-  return new PromiseModule((resolve, reject) => {
-    resolve(getRandomInt(0,10));
-  });
+function newPromiseModulePromise () {
+  return new PromiseModule((resolve, reject) => getRandomInt(0,10, resolve));
 }
 
 function runBenchmarks () {
   exports.compare = {
-    "new Promise()" : function (done) {
+    "new native Promise" : function (done) {
       newNativePromise().then(done);
     },
-    "native Promise.resolve" : function (done) {
-      nativePromiseResolve().then(done);
+    "new Fidelity Promise" : function(done) {
+      newFidelityPromise().then(done);
     },
-    "new Fidelity.Promise" : function(done) {
-      fidelityPromise().then(done);
+    "new Bluebird Promise" : function (done) {
+      newBluebirdPromise().then(done);
     },
-    "Fidelity.resolve" : function(done) {
-      fidelityResolve().then(done);
-    },
-    "Bluebird.resolve" : function (done) {
-      bluebirdPromise().then(done);
-    },
-    "Q()" : function (done) {
-      QPromise().then(done);
-    },
-    "PromiseModule.resolve" : function (done) {
-      PromiseModuleResolve().then(done);
+    "new QPromise" : function (done) {
+      newQPromise().then(done);
     },
     "new PromiseModule()" : function (done) {
-      PromiseModuleNewPromise().then(done);
+      newPromiseModulePromise().then(done);
     }
   };
 
-  exports.time = 1000;
+  exports.time = 2000;
+  exports.countPerLap = 6;
+  exports.compareCount = 10;
   require('bench').runMain();
 }
 runBenchmarks();
