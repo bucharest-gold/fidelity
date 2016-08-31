@@ -6,7 +6,13 @@
 
 A fast and simple Promise/A+ implementation.
 
-> _Node.js 4,5,6_
+|                 | Project Info  |
+| --------------- | ------------- |
+| License:        | MIT  |
+| Build:          | make  |
+| Documentation:  | http://bucharest-gold.github.io/fidelity/  |
+| Issue tracker:  | https://github.com/bucharest-gold/fidelity/issues  |
+| Engines:        | Node.js 4.x, 5.x, 6.x
 
 ## Installing
 
