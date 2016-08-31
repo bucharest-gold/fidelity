@@ -1,6 +1,6 @@
 # [![Promises/A+](https://promisesaplus.com/assets/logo-small.png)](https://promisesaplus.com) Fidelity
 
-[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity) [![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity)
+[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity) [![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity) [![dependencies Status](https://david-dm.org/bucharest-gold/fidelity/status.svg)](https://david-dm.org/bucharest-gold/fidelity)
 
 [![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
 
