@@ -2,6 +2,7 @@
   "name": "fidelity",
   "version": "4.0.0",
   "description": "A simple and fast Promises/A+ implementation",
+  "engines" : { "node" : "~4.0" },
   "main": "lib/index.js",
   "directories": {
     "test": "test"
@@ -13,7 +14,7 @@
     "docs": "jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/index.js",
     "prepublish": "nsp check",
     "benchmark": "node benchmark/benchmark.js",
-    "profile": "NODE_ENV=production node --prof test/tape-test.js && FILE=`ls -tr | tail -1` && node --prof-process $FILE | tee processed.txt && rm $FILE"
+    "profile": "node benchmark/profile.js"
   },
   "keywords": [
     "promises",
@@ -43,7 +44,7 @@
     "q": "^1.4.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
-    "v8-profiler": "^5.6.5"
+    "genet": "~0.0.1"
   },
   "repository": {
     "type": "git",

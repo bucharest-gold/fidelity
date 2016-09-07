@@ -3,4 +3,5 @@ isolate*.txt
 processed.txt
 coverage
 docs
+*.cpuprofile*
 
