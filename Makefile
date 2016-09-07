@@ -1,7 +1,8 @@
 ci: test
-	npm run coverage
 	npm run prepublish
 	npm run docs
+	npm run coverage
+	npm run profile
 
 test: lint
 	npm test
