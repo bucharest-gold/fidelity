@@ -1,11 +1,11 @@
-ci: test
+test: lint
+	npm test
+
+ci: lint
 	npm run prepublish
 	npm run docs
 	npm run coverage
 	npm run profile
-
-test: lint
-	npm test
 
 lint: node_modules
 	npm run lint
