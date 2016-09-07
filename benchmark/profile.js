@@ -11,7 +11,7 @@ function runBenchmarks () {
   const profile = new Genet({
     profileName: 'fidelity',
     // filter out everything but fidelity core code
-    filter: /^(?!.*benchmark)(?=.*fidelity).*/,
+    filter: /^(?!.*bench.*)(?=.*fidelity).*/,
     duration: 50000,
     showAppOnly: true,
     verbose: true,
