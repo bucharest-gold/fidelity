@@ -145,4 +145,12 @@ test('Promises should chain', (t) => {
     })).value, 'Test resolution');
     t.end();
   });
+
+  test('Promise.reject should produce a rejected promise', (t) => {
+    const promise = Promise.reject('some failure reason');
+    t.ok(promise instanceof Promise);
+    t.strictEqual(promise.value, 'some failure reason');
+    t.strictEqual(promise.state, Promise.REJECTED);
+    t.end();
+  });
 });

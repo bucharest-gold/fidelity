@@ -103,6 +103,11 @@ It returns a `promise`.
 A static utility function that returns a promise which has been resolved
 with the provided `value`.
 
+### Fidelity.reject(reason)
+
+A static utility function that returns a promise which has been rejected
+with the provided `reason`.
+
 ### Fidelity.deferred()
 
  A static utility function that Creates and returns a `deferred` object.
