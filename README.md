@@ -1,6 +1,9 @@
 # [![Promises/A+](https://promisesaplus.com/assets/logo-small.png)](https://promisesaplus.com) Fidelity
 
-[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity) [![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity) [![dependencies Status](https://david-dm.org/bucharest-gold/fidelity/status.svg)](https://david-dm.org/bucharest-gold/fidelity)
+[![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/fidelity/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/fidelity?branch=master)
+[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity) 
+[![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity) 
+[![dependencies Status](https://david-dm.org/bucharest-gold/fidelity/status.svg)](https://david-dm.org/bucharest-gold/fidelity)
 
 [![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
 
@@ -14,7 +17,7 @@ A fast and simple Promise/A+ implementation.
 | Issue tracker:  | https://github.com/bucharest-gold/fidelity/issues  |
 | Engines:        | Node.js 4.x, 5.x, 6.x
 
-## Installing
+## Installation
 
 `npm install fidelity`
 
@@ -251,3 +254,7 @@ performed on a Macbook Pro on a random Friday afternoon. Your results may vary.
     85.32% faster
     6.81 times as fast
     0.83 order(s) of magnitude faster
+
+## Contributing
+
+Please read the [contributing guide](./CONTRIBUTING.md)
