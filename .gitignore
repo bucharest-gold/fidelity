@@ -4,4 +4,4 @@ processed.txt
 coverage
 docs
 *.cpuprofile*
-
+.vscode
