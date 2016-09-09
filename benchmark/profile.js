@@ -27,12 +27,11 @@ function runBenchmarks () {
     }
   };
 
-  let num = 1;
   exports.done = function (data) {
-    profile.stop().then(() => console.log('Profiling stopped'));
-    bench.show(data);
-    console.error('done', num);
-    num = num + 1;
+    profile.stop().then(() => {
+      console.log('Profiling stopped');
+      bench.show(data);
+    });
   };
 
   exports.time = 5000;
