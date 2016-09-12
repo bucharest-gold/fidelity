@@ -2,7 +2,7 @@
   "name": "fidelity",
   "version": "4.0.0",
   "description": "A simple and fast Promises/A+ implementation",
-  "engines" : { "node" : "~4.0" },
+  "engines" : { "node" : ">=4.0" },
   "main": "lib/index.js",
   "directories": {
     "test": "test"
