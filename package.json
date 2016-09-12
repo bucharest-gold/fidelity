@@ -16,6 +16,12 @@
     "benchmark": "node benchmark/benchmark.js",
     "profile": "node benchmark/profile.js"
   },
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE.txt",
+    "lib"
+  ],
   "keywords": [
     "promises",
     "promise",
