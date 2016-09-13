@@ -159,7 +159,7 @@ test('Promises should chain', (t) => {
     const p2 = 2;
     const p3 = new Promise((resolve, reject) => { setTimeout(resolve, 100, 3); });
 
-    Promise.all(p1, p2, p3)
+    Promise.all([p1, p2, p3])
       .then((result) => {
         t.looseEqual(result, [1, 2, 3]);
         t.end();
@@ -172,7 +172,7 @@ test('Promises should chain', (t) => {
     const p3 = 2;
     const p4 = new Promise((resolve, reject) => { setTimeout(reject, 100, 'second'); });
 
-    Promise.all(p1, p2, p3, p4)
+    Promise.all([p1, p2, p3, p4])
       .then((_) => t.fail)
       .catch((reason) => {
         t.equal(reason, 'first');
