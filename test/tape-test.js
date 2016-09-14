@@ -159,7 +159,7 @@ test('Promises should chain', (t) => {
     const p2 = 2;
     const p3 = new Promise((resolve, reject) => { setTimeout(resolve, 100, 3); });
 
-    Promise.all([p1, p2, p3])
+    Promise.all(p1, p2, p3)
       .then((result) => {
         t.looseEqual(result, [1, 2, 3]);
         t.end();
@@ -178,5 +178,43 @@ test('Promises should chain', (t) => {
         t.equal(reason, 'first');
         t.end();
       });
+  });
+
+  test('Promise.all works with just a single promise', (t) => {
+    Promise.all(Promise.resolve(1))
+      .then((result) => {
+        t.looseEqual(result, [1]);
+        t.end();
+      });
+  });
+
+  test('Promise.race returns the first promise to resolve', (t) => {
+    const p1 = new Promise((resolve, reject) => { setTimeout(resolve, 100, 'foo'); });
+    const p2 = new Promise((resolve, reject) => { setTimeout(resolve, 500, 'bar'); });
+
+    Promise.race(p1, p2).then(result => {
+      t.strictEquals(result, 'foo');
+      t.end();
+    }).catch((e) => t.fail(e));
+  });
+
+  test('Promise.race returns the first promise to resolve', (t) => {
+    const p1 = new Promise((resolve, reject) => { setTimeout(resolve, 500, 'foo'); });
+    const p2 = new Promise((resolve, reject) => { setTimeout(resolve, 200, 'bar'); });
+    const p3 = new Promise((resolve, reject) => { setTimeout(reject, 50, 'baz'); });
+
+    Promise.race([p1, p2, p3])
+      .then(a => t.fail('Promise should not resolve'))
+      .catch(e => {
+        t.strictEquals(e, 'baz');
+        t.end();
+      });
+  });
+
+  test('Promise.race works with a single parameter', (t) => {
+    Promise.race(Promise.resolve('foo')).then(result => {
+      t.strictEquals(result, 'foo');
+      t.end();
+    }).catch((e) => t.fail(e));
   });
 });
