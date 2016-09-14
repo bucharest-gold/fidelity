@@ -1,6 +1,6 @@
 {
   "name": "fidelity",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "A simple and fast Promises/A+ implementation",
   "engines" : { "node" : ">=4.0" },
   "main": "lib/index.js",

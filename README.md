@@ -1,8 +1,8 @@
 # [![Promises/A+](https://promisesaplus.com/assets/logo-small.png)](https://promisesaplus.com) Fidelity
 
 [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/fidelity/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/fidelity?branch=master)
-[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity) 
-[![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity) 
+[![Build Status](https://travis-ci.org/bucharest-gold/fidelity.svg?branch=master)](https://travis-ci.org/bucharest-gold/fidelity)
+[![Known Vulnerabilities](https://snyk.io/test/npm/fidelity/badge.svg)](https://snyk.io/test/npm/fidelity)
 [![dependencies Status](https://david-dm.org/bucharest-gold/fidelity/status.svg)](https://david-dm.org/bucharest-gold/fidelity)
 
 [![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
@@ -110,6 +110,24 @@ with the provided `value`.
 
 A static utility function that returns a promise which has been rejected
 with the provided `reason`.
+
+See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject
+
+### Fidelity.all(iterable)
+
+A static utility function which returns a promise that resolves when all
+of the promises in the iterable argument have resolved, or rejects with
+the reason of the first passed promise that rejects.
+
+See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+
+### Fidelity.race(iterable)
+
+A static utility function which returns a promise that resolves or rejects as
+soon as one of the promises in the iterable resolves or rejects, with the value
+or reason from that promise.
+
+See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race
 
 ### Fidelity.deferred()
 
