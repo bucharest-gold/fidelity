@@ -1,4 +1,4 @@
-test: lint
+test: lint browserify
 	npm test
 
 ci: lint
@@ -9,6 +9,15 @@ ci: lint
 
 lint: node_modules
 	npm run lint
+
+browser-dist:
+	cp lib/index.js browser/fidelity-promise.js
+	npm run minify
+	tar cvf browser.tar browser
+	gzip browser.tar
+
+publish: test browser-dist publish-docs
+	npm publish
 
 publish-docs:
 	./publish-docs.sh

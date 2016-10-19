@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Testing FidelityPromise</title>
+  <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+  <meta name="description" content="Testing FidelityPromise">
+  <meta name="author" content="lball@redhat.com">
+</head>
+
+<body>
+  <div id="mocha"></div>
+  <script src="../../node_modules/mocha/mocha.js"></script>
+  <script>mocha.setup({ ui: "bdd", slow: Infinity });</script>
+  <script src="../../lib/index.js"></script>
+  <script src="browserified-tests.js"></script>
+  <script>mocha.run();</script>
+</body>
+</html>

@@ -2,7 +2,9 @@
   "name": "fidelity",
   "version": "4.1.1",
   "description": "A simple and fast Promises/A+ implementation",
-  "engines" : { "node" : ">=4.0" },
+  "engines": {
+    "node": ">=4.0"
+  },
   "main": "lib/index.js",
   "directories": {
     "test": "test"
@@ -13,13 +15,17 @@
     "coverage": "./coverage.sh",
     "docs": "jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/index.js",
     "prepublish": "nsp check",
+    "minify": "escompress lib/index.js > browser/fidelity-promise-min.js",
     "benchmark": "node benchmark/benchmark.js",
-    "profile": "node benchmark/profile.js"
+    "profile": "node benchmark/profile.js",
+    "browserify-tests": "browserify test/browser/test.js node_modules/promises-aplus-tests/lib/testFiles.js > test/browser/browserified-tests.js",
+    "test-browser": "opener http://localhost:9007/test/browser/index.html && http-server . -p 9007"
   },
   "files": [
     "package.json",
     "README.md",
     "LICENSE.txt",
+    "browser",
     "lib"
   ],
   "keywords": [
@@ -35,22 +41,28 @@
   "devDependencies": {
     "bench": "^0.3.6",
     "bluebird": "^3.3.5",
+    "browserify": "~13.1.0",
+    "escompress": "~0.5.0",
     "eslint": "^3.3.1",
     "eslint-config-semistandard": "^7.0.0-beta.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
+    "genet": "~0.0.4",
+    "http-server": "~0.9.0",
     "ink-docstrap": "^1.1.4",
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
+    "minifier": "~0.8.0",
+    "mocha": "~3.1.2",
     "nsp": "^2.4.0",
+    "opener": "~1.4.2",
     "promise": "^7.1.1",
     "promises-aplus-tests": "^2.1.1",
     "q": "^1.4.1",
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1",
-    "genet": "~0.0.4"
+    "tape": "^4.5.1"
   },
   "repository": {
     "type": "git",
