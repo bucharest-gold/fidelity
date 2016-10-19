@@ -1,6 +1,7 @@
 {
   "extends": "semistandard",
    "rules": {
-        "promise/param-names": 2
+        "promise/param-names": 2,
+        "no-new-func": 0
    }
 }
