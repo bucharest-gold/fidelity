@@ -275,4 +275,6 @@ performed on a Macbook Pro on a random Friday afternoon. Your results may vary.
 
 ## Contributing
 
-Please read the [contributing guide](./CONTRIBUTING.md)
+We encourage community contributions! Please read the
+[contributing guide](./CONTRIBUTING.md) if you would like to contribute to
+this project.
