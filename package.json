@@ -1,6 +1,6 @@
 {
   "name": "fidelity",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "A simple and fast Promises/A+ implementation",
   "engines": {
     "node": ">=4.0"
