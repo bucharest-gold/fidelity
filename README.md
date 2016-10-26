@@ -7,7 +7,9 @@
 
 [![NPM](https://nodei.co/npm/fidelity.png)](https://npmjs.org/package/fidelity)
 
-A fast and simple Promise/A+ implementation.
+A fast and simple Promise/A+ implementation capable of Node.js or browser-based
+execution. `Fidelity` adheres to both the Promise/A+ specspecification, and the
+ES6 `Promise` API in its entirety.
 
 |                 | Project Info  |
 | --------------- | ------------- |
@@ -19,7 +21,21 @@ A fast and simple Promise/A+ implementation.
 
 ## Installation
 
-`npm install fidelity`
+Fidelity can be used in Node.js.
+
+````shell
+$ npm install fidelity
+````
+
+Or in the browser.
+
+````html
+<!-- load fidelity -->
+<script src="fidelity-promise-min.js"></script>
+````
+
+When used in the browser, a `FidelityPromise` object is created in the
+`global` scope.
 
 ## Usage
 

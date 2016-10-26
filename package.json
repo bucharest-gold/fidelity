@@ -26,6 +26,7 @@
     "README.md",
     "LICENSE.txt",
     "browser",
+    "browser.tar.gz",
     "lib"
   ],
   "keywords": [
