@@ -31,13 +31,6 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="module-fidelity.html">fidelity</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
 					<li><a href="FidelityPromise.html">FidelityPromise</a></li>
@@ -363,6 +356,159 @@ and the call 'resolve' with the result, or 'reject' if there was an error.</td>
         <h3 class="subsection-title">Methods</h3>
 
         <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id=".all"><span class="type-signature">&lt;static> </span>all(promises)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Returns the results of all resolved promises, or the
+cause of the first failed promise.
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>promises</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">iterable</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an iterable</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    an Array of results, or the cause of the first rejected promise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
             
 <hr>
 <dt>
@@ -699,6 +845,313 @@ Call one of these when the work has completed (or failed).</td>
             
 <hr>
 <dt>
+    <h4 class="name" id=".race"><span class="type-signature">&lt;static> </span>race(promises)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Returns a promise that resolves or rejects as soon as one of the
+promises in the supplied iterable resolves or rejects with the value
+or reason from that promise.
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>promises</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">iterable</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an iterable</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    the first value or cause that was resolved or rejected by
+one of the supplied promises.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".reject"><span class="type-signature">&lt;static> </span>reject(reason)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Returns a promise that has been rejected.
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reason</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The reason the promise was rejected</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a rejected promise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="FidelityPromise.html">FidelityPromise</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id=".resolve"><span class="type-signature">&lt;static> </span>resolve(value)</h4>
     
     
@@ -851,7 +1304,7 @@ Call one of these when the work has completed (or failed).</td>
             
 <hr>
 <dt>
-    <h4 class="name" id="catch"><span class="type-signature"></span>catch()</h4>
+    <h4 class="name" id="catch"><span class="type-signature"></span>catch(onRejected)</h4>
     
     
 </dt>
@@ -868,6 +1321,57 @@ Call one of these when the work has completed (or failed).</td>
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>onRejected</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the function to invoke
+when this promise is rejected.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -949,7 +1453,7 @@ Call one of these when the work has completed (or failed).</td>
             
 <hr>
 <dt>
-    <h4 class="name" id="then"><span class="type-signature"></span>then()</h4>
+    <h4 class="name" id="then"><span class="type-signature"></span>then(onFulfilled, onRejected)</h4>
     
     
 </dt>
@@ -967,6 +1471,82 @@ for a `then` function.
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>onFulfilled</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the function to invoke when this promise
+has been resolved.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onRejected</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the function to invoke when this promise
+has been rejected.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -1090,9 +1670,9 @@ for a `then` function.
 
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a>
 	
-		on 2016-08-25T16:33:59-04:00
+		on 2017-01-11T14:19:07-05:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
