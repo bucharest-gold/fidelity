@@ -12,7 +12,7 @@ function runBenchmarks () {
     profileName: 'fidelity',
     // filter out everything but fidelity core code
     filter: /^(?!.*bench.*)(?=.*fidelity).*/,
-    duration: 50000,
+    duration: 1000,
     showAppOnly: true,
     verbose: true,
     flamegraph: true
@@ -34,7 +34,6 @@ function runBenchmarks () {
     });
   };
 
-  exports.time = 5000;
   exports.countPerLap = 6;
   exports.compareCount = 8;
 
