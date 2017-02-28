@@ -19,7 +19,8 @@
     "benchmark": "node benchmark/benchmark.js",
     "profile": "node benchmark/profile.js",
     "browserify-tests": "browserify ./test/browser/test.js node_modules/promises-aplus-tests/lib/testFiles.js > test/browser/browserified-tests.js",
-    "test-browser": "opener http://localhost:9007/test/browser/index.html && http-server . -p 9007"
+    "test-browser": "opener http://localhost:9007/test/browser/index.html && http-server . -p 9007",
+     "bench": "./bench.sh doxbee node 20000"
   },
   "files": [
     "package.json",
