@@ -42,7 +42,7 @@
   "license": "MIT",
   "devDependencies": {
     "bench": "~0.3.6",
-    "bluebird": "~3.4.7",
+    "bluebird": "~3.5.0",
     "browserify": "~14.0.0",
     "escompress": "~0.5.0",
     "eslint": "~3.17.0",
