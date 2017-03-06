@@ -147,9 +147,9 @@ test('Promises should chain', (t) => {
   });
 
   test('Promise.reject should produce a rejected promise', (t) => {
-    const promise = Promise.reject('some failure reason');
+    const promise = Promise.reject(new Error('some failure reason'));
     t.ok(promise instanceof Promise);
-    t.strictEqual(promise.value, 'some failure reason');
+    t.strictEqual(promise.value.message, 'some failure reason');
     t.strictEqual(promise.state, Promise.REJECTED);
     t.end();
   });
