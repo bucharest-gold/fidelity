@@ -43,7 +43,7 @@
   "devDependencies": {
     "bench": "~0.3.6",
     "bluebird": "~3.5.0",
-    "browserify": "~14.0.0",
+    "browserify": "~14.3.0",
     "escompress": "~0.5.0",
     "eslint": "~3.19.0",
     "eslint-config-semistandard": "~7.0.0",
