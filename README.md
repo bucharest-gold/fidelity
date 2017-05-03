@@ -17,7 +17,7 @@ ES6 `Promise` API in its entirety.
 | Build:          | make  |
 | Documentation:  | http://bucharest-gold.github.io/fidelity/  |
 | Issue tracker:  | https://github.com/bucharest-gold/fidelity/issues  |
-| Engines:        | Node.js 4.x, 5.x, 6.x
+| Engines:        | Node.js 6.x, 7.x
 
 ## Installation
 
