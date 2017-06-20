@@ -62,7 +62,7 @@
     "mocha": "~3.4.0",
     "nsp": "~2.6.2",
     "opener": "~1.4.2",
-    "promise": "~7.1.1",
+    "promise": "~8.0.0",
     "promises-aplus-tests": "~2.1.1",
     "q": "~1.4.1",
     "tap-spec": "~4.1.1",
