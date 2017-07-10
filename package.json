@@ -57,7 +57,7 @@
     "http-server": "~0.10.0",
     "ink-docstrap": "~1.3.0",
     "istanbul": "~0.4.3",
-    "jsdoc": "~3.4.0",
+    "jsdoc": "~3.5.0",
     "minifier": "~0.8.0",
     "mocha": "~3.4.0",
     "nsp": "~2.6.2",
