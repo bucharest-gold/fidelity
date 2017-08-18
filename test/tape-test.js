@@ -108,27 +108,27 @@ test('Promises should chain', (t) => {
     new Promise((resolve, reject) => {
       throw new Error('Test exception');
     })
-    .then((_) => {
-      t.fail('Promise should short circuit to catch');
-    })
-    .catch((e) => {
-      t.strictEqual(e.message, 'Test exception');
-      t.end();
-    });
+      .then((_) => {
+        t.fail('Promise should short circuit to catch');
+      })
+      .catch((e) => {
+        t.strictEqual(e.message, 'Test exception');
+        t.end();
+      });
   });
 
   test('promise.then.catch()', (t) => {
     new Promise((resolve, reject) => {
       resolve('Test value');
     })
-    .then((v) => {
-      t.strictEqual(v, 'Test value');
-      throw new Error('Test exception');
-    })
-    .catch((e) => {
-      t.strictEqual(e.message, 'Test exception');
-      t.end();
-    });
+      .then((v) => {
+        t.strictEqual(v, 'Test value');
+        throw new Error('Test exception');
+      })
+      .catch((e) => {
+        t.strictEqual(e.message, 'Test exception');
+        t.end();
+      });
   });
 
   test('Promise.resolve', (t) => {
