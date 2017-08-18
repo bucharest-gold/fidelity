@@ -3,10 +3,15 @@ dist: trusty
 node_js:
   - "6"
   - "8"
+before_install:
+  - npm install -g npm
+  - npm install -g coveralls greenkeeper-lockfile@1
 before_script:
-  - npm install -g coveralls
+  - greenkeeper-lockfile-update
 script:
    - make ci
+after_script:
+   - greenkeeper-lockfile-upload
 notifications:
   irc: "chat.freenode.net#brass-monkey"
 after_success:
