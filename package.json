@@ -60,7 +60,7 @@
     "jsdoc": "3.5.4",
     "minifier": "0.8.1",
     "mocha": "~3.5.0",
-    "nsp": "~2.7.0",
+    "nsp": "~2.8.0",
     "opener": "1.4.3",
     "promise": "8.0.1",
     "promises-aplus-tests": "2.1.2",
