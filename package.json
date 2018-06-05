@@ -67,7 +67,7 @@
     "promise": "8.0.1",
     "promises-aplus-tests": "2.1.2",
     "q": "1.5.1",
-    "tap-spec": "~4.1.1",
+    "tap-spec": "~5.0.0",
     "tape": "~4.9.0"
   },
   "repository": {
