@@ -63,7 +63,7 @@
     "mocha": "~5.2.0",
     "moment": "^2.21.0",
     "nsp": "~3.2.1",
-    "opener": "1.4.3",
+    "opener": "1.5.1",
     "promise": "8.0.1",
     "promises-aplus-tests": "2.1.2",
     "q": "1.5.1",
